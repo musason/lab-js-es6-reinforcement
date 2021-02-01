@@ -5,11 +5,13 @@
 const getFirstNames = arr => {
   const userFirstNames = [];
   for (let user of arr) {
-    // Your code goes here ...
+      userFirstNames.push(user.firstName)
   }
+  console.log(userFirstNames)
 };
+getFirstNames(usersArray)
 
-getFirstNames(usersArray);
+
 // expected output:
 // [ 'Kirby', 'Tracie', 'Kendra', 'Kinney', 'Howard', 'Rachelle', 'Lizzie' ]
 
@@ -18,7 +20,11 @@ getFirstNames(usersArray);
 // ***************************************************************************
 
 const getFullNames = arr => {
-  // Your code goes here ...
+  let userFullNames = []
+  for (let user of arr){
+    userFullNames.push(`${user.firstName} ${user.lastName}`)
+  }
+  return userFullNames
 };
 
 getFullNames(usersArray);
@@ -31,7 +37,13 @@ getFullNames(usersArray);
 // ***************************************************************************
 
 const getUsersCreditDetails = arr => {
-  // Your code goes here ...
+  let userDetails = []
+  for (let user of arr){
+    let {firstName, lastName, balance} = user
+    let result = {firstName, lastName, balance}
+    userDetails.push(result)
+  }
+  console.log(userDetails)
 };
 
 getUsersCreditDetails(usersArray);
@@ -49,7 +61,13 @@ getUsersCreditDetails(usersArray);
 // ***************************************************************************
 
 const genderView = users => {
-  // Your code goes here ...
+  let maleUsers = users.filter(user => user.gender === "male")
+  let femaleUsers = users.filter(user => user.gender === "female")
+  let maleResult = getFullNames(maleUsers)
+  let femaleResult = getFullNames(femaleUsers)
+  let someObj = {femaleUsers: femaleResult, maleUsers: maleResult}
+  return someObj
+ 
 };
 
 genderView(usersArray);
@@ -66,7 +84,8 @@ genderView(usersArray);
 const data = genderView(usersArray);
 
 const genderCount = data => {
-  // Your code goes here ...
+  let genderVar = data
+  console.log("Female: "+genderVar.femaleUsers.length + " Male: "+genderVar.maleUsers.length)
 };
 
 genderCount(data);
@@ -79,9 +98,19 @@ genderCount(data);
 // ***************************************************************************
 
 const promo20 = users => {
-  // Your code goes here ...
+  let promotion = users.filter(user => Number(user.balance.slice(1,-7)))
+  let emptyArr = []
+  for (user of promotion){
+    if(user.balance.slice(1,-7) >= 20){
+      emptyArr.push(user)
+    }
+  }
+  for(user of emptyArr){
+    console.log(`Dear ${user.firstName}, since your balance is ${user.balance}, you are eligible to apply for this awesome credit card.`)
+  }
 };
 
+promo20(usersArray)
 // expected output:
 // Dear Howard, since your balance is $21,307.75, you are eligible to apply for this awesome credit card.
 // Dear Rachelle, since your balance is $35,121.49, you are eligible to apply for this awesome credit card.
@@ -91,7 +120,10 @@ const promo20 = users => {
 // ***************************************************************************
 
 const addActive = users => {
-  // Your code goes here ...
+  for(user of users){
+    user.isActive=true
+  }
+  console.log(users)
 };
 
 addActive(usersArray);
@@ -108,3 +140,4 @@ addActive(usersArray);
 //      // ...
 //    }
 // ]
+
